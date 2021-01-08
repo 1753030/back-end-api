@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "student_courses",
+  "info": {
+    "name": "Student-Course",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "courseId": {
+      "model": "course"
+    },
+    "userId": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "rate": {
+      "type": "integer"
+    },
+    "comment": {
+      "type": "string"
+    },
+    "progress": {
+      "type": "integer"
+    }
+  }
+}

@@ -1,8 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "categories",
+  "collectionName": "wish_lists",
   "info": {
-    "name": "Category",
+    "name": "WishList",
     "description": ""
   },
   "options": {
@@ -11,14 +11,12 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "Title": {
-      "type": "string"
+    "userId": {
+      "plugin": "users-permissions",
+      "model": "user"
     },
-    "categories": {
-      "collection": "category"
-    },
-    "level": {
-      "type": "integer"
+    "courseId": {
+      "model": "course"
     }
   }
 }

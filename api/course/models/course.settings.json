@@ -1,0 +1,67 @@
+{
+  "kind": "collectionType",
+  "collectionName": "courses",
+  "info": {
+    "name": "Course",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "avatar": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "title": {
+      "type": "string"
+    },
+    "detailDes": {
+      "type": "text"
+    },
+    "briefDes": {
+      "type": "string"
+    },
+    "rating": {
+      "type": "decimal"
+    },
+    "numRate": {
+      "type": "integer"
+    },
+    "numRegister": {
+      "type": "integer"
+    },
+    "price": {
+      "type": "integer"
+    },
+    "discount": {
+      "type": "decimal"
+    },
+    "chaptersId": {
+      "collection": "chapter"
+    },
+    "categories": {
+      "collection": "category"
+    },
+    "instructorId": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "courses"
+    },
+    "numChapter": {
+      "type": "integer"
+    },
+    "isDone": {
+      "type": "boolean"
+    }
+  }
+}

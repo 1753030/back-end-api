@@ -1,9 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "categories",
+  "collectionName": "chapters",
   "info": {
-    "name": "Category",
-    "description": ""
+    "name": "Chapter"
   },
   "options": {
     "increments": true,
@@ -11,14 +10,14 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string"
     },
-    "categories": {
-      "collection": "category"
+    "description": {
+      "type": "string"
     },
-    "level": {
-      "type": "integer"
+    "ytbUrl": {
+      "type": "string"
     }
   }
 }
