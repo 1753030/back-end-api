@@ -62,6 +62,9 @@
     },
     "isDone": {
       "type": "boolean"
+    },
+    "numSeen": {
+      "type": "biginteger"
     }
   }
 }
