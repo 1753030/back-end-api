@@ -7,6 +7,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "PUT",
+      "path": "/testcategory/:id",
+      "handler": "testmailer.findCourseByInstructor",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

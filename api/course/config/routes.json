@@ -47,6 +47,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/courses/:findByStudent/:id",
+      "handler": "course.findByStudent",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

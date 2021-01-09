@@ -1,5 +1,5 @@
 'use strict'
-
+const { parseMultipartData, sanitizeEntity } = require('strapi-utils');
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/concepts/controllers.html#core-controllers)
  * to customize this controller
@@ -15,4 +15,11 @@ module.exports = {
         html: 'Hello world!',
       });
   },
+  async findCourseByInstructor(ctx) {
+    console.log(ctx.params.id);
+    return await strapi.services.course.find({
+      id: ctx.params.id,
+      'instructorId.id': ctx.state.user.id,
+    });
+  }
 }
