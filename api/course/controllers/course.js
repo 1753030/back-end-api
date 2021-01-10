@@ -61,6 +61,7 @@ module.exports = {
     return sanitizeEntity(entity, { model: strapi.models.course })
   },
   async find(ctx) {
+    console.log(ctx.query);
     let entities
     if (ctx.query._q) {
       entities = await strapi.services.course.search(ctx.query)
@@ -105,16 +106,29 @@ module.exports = {
     });
 
     let listIdCourse = {
-        _where: [],
+        id_in: [],
       };
     entities.map(entity => {
-        listIdCourse._where.push({
-            id_in: entity.courseId.id
-        });
+        listIdCourse.id_in.push(
+            entity.courseId.id
+        );
     })
     
+    console.log("course.findByStudent: " + listIdCourse);
     const entity = await strapi.services.course.find(listIdCourse);
     // return ctx.query;
+    return sanitizeEntity(entity, { model: strapi.models.course });
+  },
+  async create(ctx) {
+    let entity;
+    if (ctx.is('multipart')) {
+      const { data, files } = parseMultipartData(ctx);
+      data.instructorId = ctx.state.user.id;
+      entity = await strapi.services.course.create(data, { files });
+    } else {
+      ctx.request.body.instructorId = ctx.state.user.id;
+      entity = await strapi.services.course.create(ctx.request.body);
+    }
     return sanitizeEntity(entity, { model: strapi.models.course });
   },
   //   async findByStudent(ctx) {
