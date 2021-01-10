@@ -1,5 +1,6 @@
 'use strict'
-const { parseMultipartData, sanitizeEntity } = require('strapi-utils')
+const { parseMultipartData, sanitizeEntity } = require('strapi-utils');
+const qs = require('qs');
 
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/concepts/controllers.html#core-controllers)
@@ -82,31 +83,56 @@ module.exports = {
       return course
     })
   },
+  async findOne(ctx) {
+    const { id } = ctx.params
+
+    const entity = await strapi.services.course.findOne({ id })
+    const course = sanitizeEntity(entity, { model: strapi.models.course })
+    if (course.chaptersId) {
+      course.chaptersId.forEach((chapter) => {
+        if (chapter) {
+          delete chapter.ytbUrl
+        }
+      })
+    }
+    return course;
+  },
   async findByStudent(ctx) {
-    console.log(ctx.params)
+    const { id } = ctx.params;
+    
     const entities = await strapi.services['student-course'].find({
         'userId.id': ctx.state.user.id,
     });
 
-    console.log(entities);
-
-    return entities.map((entity) => {
-        const studentCourse = sanitizeEntity(entity, {
-          model: strapi.models['student-course'],
-        })
-  
-        return studentCourse
-      })
-
-    // let entities;
-    // if (ctx.query._q) {
-    //   entities = await strapi.services.restaurant.search(ctx.query);
-    // } else {
-    //   entities = await strapi.services.restaurant.find(ctx.query);
-    // }
-
-    // return entities.map(entity => sanitizeEntity(entity, { model: strapi.models.restaurant }));
-
-    return 'Hello world'
+    let listIdCourse = {
+        _where: [],
+      };
+    entities.map(entity => {
+        listIdCourse._where.push({
+            id_in: entity.courseId.id
+        });
+    })
+    
+    const entity = await strapi.services.course.find(listIdCourse);
+    // return ctx.query;
+    return sanitizeEntity(entity, { model: strapi.models.course });
   },
+  //   async findByStudent(ctx) {
+  //     console.log(ctx.params)
+  //     const entities = await strapi.services['student-course'].find({
+  //         'userId.id': ctx.state.user.id,
+  //     });
+
+  //     console.log(entities);
+
+  //     return entities.map((entity) => {
+  //         const studentCourse = sanitizeEntity(entity, {
+  //           model: strapi.models['student-course'],
+  //         })
+
+  //         return studentCourse
+  //       })
+
+  //     return 'Hello world'
+  //   },
 }

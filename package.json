@@ -11,6 +11,7 @@
   },
   "devDependencies": {},
   "dependencies": {
+    "qs": "^6.9.4",
     "sendmail": "^1.6.1",
     "strapi": "3.4.1",
     "strapi-admin": "3.4.1",

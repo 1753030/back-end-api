@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cards",
+  "info": {
+    "name": "Card"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "courses": {
+      "collection": "course"
+    },
+    "users": {
+      "plugin": "users-permissions",
+      "model": "user"
+    }
+  }
+}
