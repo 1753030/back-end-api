@@ -511,7 +511,7 @@
         ]
       }
     },
-    "/courses/{findByStudent}/{id}": {
+    "/courses/{findBySomething}/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -567,7 +567,7 @@
         ],
         "parameters": [
           {
-            "name": "findByStudent",
+            "name": "findBySomething",
             "in": "path",
             "description": "",
             "deprecated": false,

@@ -50,8 +50,8 @@
     },
     {
       "method": "GET",
-      "path": "/courses/:findByStudent/:id",
-      "handler": "course.findByStudent",
+      "path": "/courses/:findBySomething/:id",
+      "handler": "course.findBySomething",
       "config": {
         "policies": []
       }

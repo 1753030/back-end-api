@@ -3,7 +3,7 @@ module.exports = ({ env }) => ({
       provider: 'nodemailer',
       providerOptions: {
         host: env('SMTP_HOST', 'smtp.gmail.com'),
-        port: env('SMTP_PORT', 587),
+        port: env('SMTP_PORT', 465),
         auth: {
           user: env('SMTP_USERNAME', "group06onlineacademy@gmail.com"),
           pass: env('SMTP_PASSWORD', "onlineacademy06"),

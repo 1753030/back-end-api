@@ -98,21 +98,21 @@ module.exports = {
     }
     return course
   },
-  async findByStudent(ctx) {
-    const { id, findByStudent } = ctx.params
+  async findBySomething(ctx) {
+    const { id, findBySomething } = ctx.params
     console.log(ctx.params)
 
     const entities = await strapi.services['student-course'].find({
       'userId.id': ctx.state.user.id,
     })
 
-    console.log(entities.length);
+    console.log(entities.length)
 
-    if (findByStudent === 'findOneByStudent') {
+    if (findBySomething === 'findOneByStudent') {
       let flag = false
       entities.map((entity) => {
         if (entity.courseId.id === id) {
-          flag = true;
+          flag = true
         }
       })
 
@@ -123,6 +123,28 @@ module.exports = {
       const entity = await strapi.services.course.findOne({ id })
       const course = sanitizeEntity(entity, { model: strapi.models.course })
       return course
+    } else if (findBySomething === 'findAllByCategory') {
+      let entities = await strapi.services.course.find(ctx.query);
+      let listCourse = [];  
+      entities.map((entity) => {
+        const course = sanitizeEntity(entity, {
+            model: strapi.models.course,
+          })
+          
+          let flag = false;
+          course.categories.forEach((category) => {
+              if(category.id === id) 
+              {
+                  flag = true;
+              }
+          })
+          console.log("hi" + flag)
+
+          if(flag) {
+              listCourse.push(course)
+          }
+      })
+      return listCourse;
     }
 
     let listIdCourse = {
@@ -150,6 +172,7 @@ module.exports = {
     }
     return sanitizeEntity(entity, { model: strapi.models.course })
   },
+
   //   async findByStudent(ctx) {
   //     console.log(ctx.params)
   //     const entities = await strapi.services['student-course'].find({
