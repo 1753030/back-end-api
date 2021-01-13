@@ -13,54 +13,54 @@ module.exports = {
     if (ctx.is('multipart')) {
       const { data, files } = parseMultipartData(ctx)
       data.userId = ctx.state.user.id
-      entity = await strapi.services['wish-list'].create(data, { files })
+      entity = await strapi.services.cart.create(data, { files })
     } else {
       ctx.request.body.userId = ctx.state.user.id
-      entity = await strapi.services['wish-list'].create(ctx.request.body)
+      entity = await strapi.services.cart.create(ctx.request.body)
     }
-    return sanitizeEntity(entity, { model: strapi.models['wish-list'] })
+    return sanitizeEntity(entity, { model: strapi.models.cart })
   },
   async update(ctx) {
     const { id } = ctx.params
 
     let entity
 
-    const [withList] = await strapi.services['wish-list'].find({
+    const [cartList] = await strapi.services.cart.find({
       id: ctx.params.id,
       'userId.id': ctx.state.user.id,
     })
 
-    if (!withList) {
+    if (!cartList) {
       return ctx.unauthorized(`You can't update this entry`)
     }
 
     if (ctx.is('multipart')) {
       const { data, files } = parseMultipartData(ctx)
-      entity = await strapi.services['wish-list'].update({ id }, data, {
+      entity = await strapi.services.cart.update({ id }, data, {
         files,
       })
     } else {
-      entity = await strapi.services['wish-list'].update(
+      entity = await strapi.services.cart.update(
         { id },
         ctx.request.body,
       )
     }
 
-    return sanitizeEntity(entity, { model: strapi.models['wish-list'] })
+    return sanitizeEntity(entity, { model: strapi.models.cart })
   },
   async delete(ctx) {
     const { id } = ctx.params
 
-    const [withList] = await strapi.services['wish-list'].find({
+    const [cartList] = await strapi.services.cart.find({
       id: ctx.params.id,
       'userId.id': ctx.state.user.id,
     })
 
-    if (!withList) {
+    if (!cartList) {
       return ctx.unauthorized(`You can't update this entry`)
     }
 
-    const entity = await strapi.services['wish-list'].delete({ id })
-    return sanitizeEntity(entity, { model: strapi.models['wish-list'] })
+    const entity = await strapi.services.cart.delete({ id })
+    return sanitizeEntity(entity, { model: strapi.models.cart })
   },
 }

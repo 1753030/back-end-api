@@ -109,6 +109,7 @@ module.exports = {
     console.log(entities.length)
 
     if (findBySomething === 'findOneByStudent') {
+      // courses/findOneByStudent/:id (id cua courses) (1 khoa hoc thuoc ve 1 student)
       let flag = false
       entities.map((entity) => {
         if (entity.courseId.id === id) {
@@ -124,41 +125,59 @@ module.exports = {
       const course = sanitizeEntity(entity, { model: strapi.models.course })
       return course
     } else if (findBySomething === 'findAllByCategory') {
-      let entities = await strapi.services.course.find(ctx.query);
-      let listCourse = [];  
+      // courses/findAllByCategory/:id (id cua category) (tat ca khoa hoc thuoc ve 1 category)
+      let entities = await strapi.services.course.find(ctx.query)
+      let listCourse = []
       entities.map((entity) => {
         const course = sanitizeEntity(entity, {
-            model: strapi.models.course,
-          })
-          
-          let flag = false;
-          course.categories.forEach((category) => {
-              if(category.id === id) 
-              {
-                  flag = true;
-              }
-          })
-          console.log("hi" + flag)
+          model: strapi.models.course,
+        })
 
-          if(flag) {
-              listCourse.push(course)
+        let flag = false
+        course.categories.forEach((category) => {
+          if (category.id === id) {
+            flag = true
           }
+        })
+        console.log('hi' + flag)
+
+        if (flag) {
+          listCourse.push(course)
+        }
       })
-      return listCourse;
+      return listCourse
+    } else if (findBySomething === 'findAllByStudent') {
+      // courses/findAllByStudent/1 (tat ca khoa hoc thuoc ve 1 student)
+      let listIdCourse = {
+        id_in: [],
+      }
+
+      entities.map((entity) => {
+        listIdCourse.id_in.push(entity.courseId.id)
+      })
+
+      console.log('course.findByStudent: ' + listIdCourse)
+      const entity = await strapi.services.course.find(listIdCourse)
+      // return ctx.query;
+      return sanitizeEntity(entity, { model: strapi.models.course })
+    } else if (findBySomething === 'findAllByWishList') {
+      const entitiesWishList = await strapi.services['wish-list'].find({
+        'userId.id': ctx.state.user.id,
+      })
+
+      let listIdCourse = {
+        id_in: [],
+      }
+
+      entitiesWishList.map((entity) => {
+        listIdCourse.id_in.push(entity.courseId.id)
+      })
+
+      console.log('course.findAllByWishList: ' + listIdCourse)
+      const entity = await strapi.services.course.find(listIdCourse)
+      // return ctx.query;
+      return sanitizeEntity(entity, { model: strapi.models.course })
     }
-
-    let listIdCourse = {
-      id_in: [],
-    }
-
-    entities.map((entity) => {
-      listIdCourse.id_in.push(entity.courseId.id)
-    })
-
-    console.log('course.findByStudent: ' + listIdCourse)
-    const entity = await strapi.services.course.find(listIdCourse)
-    // return ctx.query;
-    return sanitizeEntity(entity, { model: strapi.models.course })
   },
   async create(ctx) {
     let entity

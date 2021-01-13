@@ -1,6 +1,6 @@
 {
   "kind": "collectionType",
-  "collectionName": "cards",
+  "collectionName": "carts",
   "info": {
     "name": "Cart",
     "description": ""
@@ -11,10 +11,10 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "courses": {
+    "courseId": {
       "collection": "course"
     },
-    "users": {
+    "userId": {
       "plugin": "users-permissions",
       "model": "user"
     }

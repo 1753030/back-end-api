@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "01/12/2021 10:45:24 PM"
+    "x-generation-date": "01/13/2021 10:35:29 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -45,7 +45,7 @@
     }
   ],
   "paths": {
-    "/cards": {
+    "/carts": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -57,7 +57,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Card"
+                    "$ref": "#/components/schemas/Cart"
                   }
                 }
               }
@@ -96,7 +96,7 @@
         },
         "summary": "",
         "tags": [
-          "Card"
+          "Cart"
         ],
         "parameters": [
           {
@@ -246,7 +246,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Card"
+                  "$ref": "#/components/schemas/Cart"
                 }
               }
             }
@@ -284,7 +284,7 @@
         },
         "summary": "",
         "tags": [
-          "Card"
+          "Cart"
         ],
         "requestBody": {
           "description": "",
@@ -292,14 +292,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewCard"
+                "$ref": "#/components/schemas/NewCart"
               }
             }
           }
         }
       }
     },
-    "/cards/count": {
+    "/carts/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -351,12 +351,12 @@
         },
         "summary": "",
         "tags": [
-          "Card"
+          "Cart"
         ],
         "parameters": []
       }
     },
-    "/cards/{id}": {
+    "/carts/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -366,7 +366,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Card"
+                  "$ref": "#/components/schemas/Cart"
                 }
               }
             }
@@ -404,7 +404,7 @@
         },
         "summary": "",
         "tags": [
-          "Card"
+          "Cart"
         ],
         "parameters": [
           {
@@ -428,7 +428,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Card"
+                  "$ref": "#/components/schemas/Cart"
                 }
               }
             }
@@ -466,7 +466,7 @@
         },
         "summary": "",
         "tags": [
-          "Card"
+          "Cart"
         ],
         "requestBody": {
           "description": "",
@@ -474,7 +474,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewCard"
+                "$ref": "#/components/schemas/NewCart"
               }
             }
           }
@@ -540,7 +540,7 @@
         },
         "summary": "",
         "tags": [
-          "Card"
+          "Cart"
         ],
         "parameters": [
           {
@@ -5456,7 +5456,7 @@
   },
   "components": {
     "schemas": {
-      "Card": {
+      "Cart": {
         "required": [
           "id"
         ],
@@ -5464,7 +5464,7 @@
           "id": {
             "type": "string"
           },
-          "courses": {
+          "courseId": {
             "required": [
               "id"
             ],
@@ -5528,7 +5528,7 @@
               }
             }
           },
-          "users": {
+          "userId": {
             "required": [
               "id",
               "username",
@@ -5591,12 +5591,12 @@
           }
         }
       },
-      "NewCard": {
+      "NewCart": {
         "properties": {
-          "courses": {
+          "courseId": {
             "type": "string"
           },
-          "users": {
+          "userId": {
             "type": "string"
           },
           "published_at": {
@@ -6784,7 +6784,7 @@
   },
   "tags": [
     {
-      "name": "Card"
+      "name": "Cart"
     },
     {
       "name": "Category"
