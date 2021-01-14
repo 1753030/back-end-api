@@ -10,6 +10,15 @@
     },
     {
       "method": "GET",
+      "path": "/categories/findMax",
+      "handler": "category.findMax",
+      "config": {
+        "policies": []
+      }
+    }
+    ,
+    {
+      "method": "GET",
       "path": "/categories/count",
       "handler": "category.count",
       "config": {
