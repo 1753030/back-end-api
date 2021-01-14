@@ -736,6 +736,9 @@
               "level": {
                 "type": "integer"
               },
+              "avatar": {
+                "type": "string"
+              },
               "published_at": {
                 "type": "string"
               },

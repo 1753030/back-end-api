@@ -49,7 +49,7 @@ module.exports = {
     let res = [];
     for (var i = 0; i < 5; i++) {
       count[i].category['numRegister'] = count[i].numRegister
-      const category = sanitizeEntity(item.category, {
+      const category = sanitizeEntity(count[i].category, {
         model: strapi.models.category,
       })
       res.push(category);
