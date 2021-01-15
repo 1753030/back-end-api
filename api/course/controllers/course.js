@@ -102,13 +102,12 @@ module.exports = {
     const { id, findBySomething } = ctx.params
     console.log(ctx.params)
 
-    const entities = await strapi.services['student-course'].find({
-      'userId.id': ctx.state.user.id,
-    })
-
-    console.log(entities.length)
-
     if (findBySomething === 'findOneByStudent') {
+      const entities = await strapi.services['student-course'].find({
+        'userId.id': ctx.state.user.id,
+      })
+
+      console.log(entities.length)
       // courses/findOneByStudent/:id (id cua courses) (1 khoa hoc thuoc ve 1 student)
       let flag = false
       entities.map((entity) => {
@@ -147,6 +146,11 @@ module.exports = {
       })
       return listCourse
     } else if (findBySomething === 'findAllByStudent') {
+      const entities = await strapi.services['student-course'].find({
+        'userId.id': ctx.state.user.id,
+      })
+  
+      console.log(entities.length)
       // courses/findAllByStudent/1 (tat ca khoa hoc thuoc ve 1 student)
       let listIdCourse = {
         id_in: [],
